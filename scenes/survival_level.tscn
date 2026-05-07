@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c3imms0bxlkyb"]
+
+[ext_resource type="PackedScene" uid="uid://3n1gaqrtqmpa" path="res://characters/astronaut_player.tscn" id="1_o3ai2"]
+
+[node name="SurvivalLevel" type="Node2D" unique_id=199767071]
+
+[node name="Objects" type="Node2D" parent="." unique_id=176015704]
+
+[node name="AstronautPlayer" parent="Objects" unique_id=555874912 instance=ExtResource("1_o3ai2")]
