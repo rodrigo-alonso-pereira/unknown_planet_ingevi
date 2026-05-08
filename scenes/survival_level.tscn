@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://c3imms0bxlkyb"]
 
+[ext_resource type="Texture2D" uid="uid://cc0nvyeb4ohuv" path="res://icon.svg" id="1_na5b7"]
 [ext_resource type="PackedScene" uid="uid://3n1gaqrtqmpa" path="res://characters/astronaut_player.tscn" id="1_o3ai2"]
 
 [node name="SurvivalLevel" type="Node2D" unique_id=199767071]
+
+[node name="Layers" type="Node" parent="." unique_id=351428003]
+
+[node name="Icon" type="Sprite2D" parent="Layers" unique_id=619309524]
+position = Vector2(-92, -53)
+texture = ExtResource("1_na5b7")
 
 [node name="Objects" type="Node2D" parent="." unique_id=176015704]
 
