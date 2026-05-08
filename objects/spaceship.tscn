@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d4bh1xfk8bqjl"]
+
+[ext_resource type="Texture2D" uid="uid://cl7ylwv466017" path="res://art/environment/spaceship.png" id="1_f1qw5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_br018"]
+radius = 36.0
+height = 190.0
+
+[node name="Spaceship" type="StaticBody2D" unique_id=1730065004]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=958771384]
+scale = Vector2(0.170277, 0.19824217)
+texture = ExtResource("1_f1qw5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=562862697]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_br018")

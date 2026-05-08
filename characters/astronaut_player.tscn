@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cgbkggesd7j8y" path="res://art/characters/Astronaut.png" id="1_1kks7"]
 [ext_resource type="Script" uid="uid://bs5k6o81dt1lj" path="res://characters/astronaut_player.gd" id="1_dlna3"]
+[ext_resource type="Script" uid="uid://cyct7ruptadmg" path="res://characters/camera_2d.gd" id="3_6pd50"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kks7"]
 radius = 9.0
@@ -386,3 +387,4 @@ parameters/MoveStateMachine/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667921481]
 zoom = Vector2(4, 4)
+script = ExtResource("3_6pd50")
