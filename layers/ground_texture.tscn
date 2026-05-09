@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://8gg3ib4vatg"]
+
+[ext_resource type="Texture2D" uid="uid://323yjfiuswhb" path="res://art/environment/sand.png" id="1_l6jqf"]
+
+[node name="GroundTexture" type="Sprite2D" unique_id=960094184]
+modulate = Color(0.5882353, 0.48235294, 0.4117647, 1)
+z_index = -100
+texture_repeat = 2
+texture = ExtResource("1_l6jqf")
+region_enabled = true
+region_rect = Rect2(0, 0, 5000, 5000)

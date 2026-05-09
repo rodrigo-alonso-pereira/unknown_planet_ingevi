@@ -1,15 +1,20 @@
 [gd_scene format=3 uid="uid://dc8utasqc6jw2"]
 
-[ext_resource type="Texture2D" uid="uid://bpjg5ac0061b2" path="res://art/environment/crater.png" id="1_1nr5j"]
+[ext_resource type="Texture2D" uid="uid://bqlsrcrhij61l" path="res://art/environment/crater.png" id="1_1nr5j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_48ty3"]
-radius = 243.0
+radius = 306.2372
 
 [node name="Crater" type="StaticBody2D" unique_id=1512578400]
+z_index = -50
+y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=881038715]
-scale = Vector2(0.39282227, 0.37646484)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=247583190]
+y_sort_enabled = true
+scale = Vector2(0.392, 0.4)
 texture = ExtResource("1_1nr5j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1311483782]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=113960770]
+scale = Vector2(0.8, 0.8)
 shape = SubResource("CircleShape2D_48ty3")

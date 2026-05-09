@@ -386,5 +386,5 @@ parameters/MoveStateMachine/Idle/blend_position = Vector2(0, 0)
 parameters/MoveStateMachine/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667921481]
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 script = ExtResource("3_6pd50")
