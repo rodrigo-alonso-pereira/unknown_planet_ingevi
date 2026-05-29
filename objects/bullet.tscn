@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bjl2ycbp8i0x1"]
+
+[ext_resource type="Texture2D" uid="uid://3kdsl50m57yo" path="res://art/weapons/bullet.PNG" id="1_1hbe6"]
+[ext_resource type="Script" uid="uid://b42ad5bmkug2t" path="res://objects/bullet.gd" id="1_3ndsa"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3ndsa"]
+radius = 39.999992
+height = 159.99998
+
+[node name="Bullet" type="RigidBody2D" unique_id=2059897870]
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_3ndsa")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1217234845]
+position = Vector2(-7, 0)
+scale = Vector2(0.05, 0.053)
+texture = ExtResource("1_1hbe6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=27327175]
+position = Vector2(-0.99999994, 1.0587912e-21)
+rotation = 1.5707964
+scale = Vector2(0.05, 0.05)
+shape = SubResource("CapsuleShape2D_3ndsa")
