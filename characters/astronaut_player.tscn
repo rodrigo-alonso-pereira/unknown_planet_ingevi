@@ -2,11 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cgbkggesd7j8y" path="res://art/characters/Astronaut.png" id="1_1kks7"]
 [ext_resource type="Script" uid="uid://bs5k6o81dt1lj" path="res://characters/astronaut_player.gd" id="1_dlna3"]
+[ext_resource type="PackedScene" uid="uid://bjl2ycbp8i0x1" path="res://objects/bullet.tscn" id="2_66drl"]
 [ext_resource type="Script" uid="uid://cyct7ruptadmg" path="res://characters/camera_2d.gd" id="3_6pd50"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kks7"]
-radius = 9.0
-height = 18.0
+[ext_resource type="AudioStream" uid="uid://cnrajjralodsm" path="res://sfx/shoot.wav" id="5_q0hhv"]
 
 [sub_resource type="Animation" id="Animation_1kks7"]
 length = 0.001
@@ -362,16 +360,13 @@ nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_21ceh")
 nodes/MoveStateMachine/position = Vector2(-265.37958, 135.70367)
 node_connections = [&"output", 0, &"MoveStateMachine"]
 
-[node name="AstronautPlayer" type="CharacterBody2D" unique_id=555874912]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kks7"]
+radius = 9.0
+height = 18.0
+
+[node name="AstronautPlayer" type="CharacterBody2D" unique_id=555874912 groups=["player"]]
 script = ExtResource("1_dlna3")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=860466769]
-texture = ExtResource("1_1kks7")
-flip_h = true
-hframes = 12
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=869951004]
-shape = SubResource("CapsuleShape2D_1kks7")
+bullet_scene = ExtResource("2_66drl")
 
 [node name="Animation" type="Node" parent="." unique_id=542113588]
 
@@ -385,6 +380,17 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/MoveStateMachine/Idle/blend_position = Vector2(0, 0)
 parameters/MoveStateMachine/Walk/blend_position = Vector2(0, 0)
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=860466769]
+texture = ExtResource("1_1kks7")
+flip_h = true
+hframes = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=869951004]
+shape = SubResource("CapsuleShape2D_1kks7")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667921481]
 zoom = Vector2(2, 2)
 script = ExtResource("3_6pd50")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=178146125]
+stream = ExtResource("5_q0hhv")

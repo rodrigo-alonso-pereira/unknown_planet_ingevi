@@ -6,9 +6,15 @@ const acceleration = 800
 const friction = 1000
 # Variable que recuerda la ultima posicion hacia donde miró el personaje
 var last_direction := Vector2.DOWN
+# Control de estado para la mecánica principal
+var has_weapon := false
+# Carga de la escena de la bala
+@export var bullet_scene: PackedScene
 
 @onready var anim_tree = $Animation/AnimationTree
 @onready var move_state_machine = anim_tree.get("parameters/MoveStateMachine/playback")
+@onready var sprite = Sprite2D
+@onready var shoot_sound = $ShootSound
 
 
 func _physics_process(delta: float) -> void:
@@ -18,6 +24,9 @@ func _physics_process(delta: float) -> void:
 	move(direction, delta)
 	# Recibe hacia donde mira el personaje para actualizar el BlendSpace
 	animate(direction)
+	# Verificacion de disparo
+	if has_weapon and Input.is_action_just_pressed("shoot"):
+		shoot()
 
 func move(direction: Vector2, delta: float) -> void:
 	if direction != Vector2.ZERO:
@@ -47,3 +56,39 @@ func animate(direction: Vector2) -> void:
 	else:
 		# Si no hay input, viajamos al estado Quieto (Idle)
 		move_state_machine.travel("Idle")
+# Función llamada por weapon_pickup al interactuar
+func equip_weapon() -> void:
+	has_weapon = true
+	print("Arma de astronauta equipada con éxito")
+
+func shoot() -> void:
+	if bullet_scene == null:
+		return
+		
+	# Instanciamos el proyectil balístico en tiempo de ejecución
+	var bullet_instance = bullet_scene.instantiate()
+	
+	# Calculamos el vector de salida horizontal basado en la orientación del personaje
+	var shoot_direction = Vector2.RIGHT
+	if sprite.flip_h:
+		shoot_direction = Vector2.LEFT
+		
+	# Añadimos el proyectil al nodo raíz del nivel para independizar su trayectoria física
+	get_parent().add_child(bullet_instance)
+	
+	# Posicionamos la bala en el origen del jugador
+	bullet_instance.global_position = global_position
+	bullet_instance.rotation = shoot_direction.angle()
+	
+	# Reproducción del AudioStreamPlayer sin distorsión
+	if shoot_sound:
+		shoot_sound.play()
+		
+	# Squash & Stretch del cuerpo del astronauta al disparar
+	apply_shoot_kickback()
+
+func apply_shoot_kickback() -> void:
+	# Deformación dinámica del sprite usando interpolación por Tween
+	var tween = create_tween()
+	tween.tween_property(sprite, "scale", Vector2(0.85, 1.15), 0.04)
+	tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.08)

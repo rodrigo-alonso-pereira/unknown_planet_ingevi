@@ -2,8 +2,8 @@ extends Area2D
 
 var player_nearby: bool = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+# Called every frame
+func _process(_delta: float) -> void:
 	# Si el jugador esta dentro del area y presiona la tecla de interacción
 	if player_nearby and Input.is_action_just_pressed("interact"):
 		# Llama a una funcion para equipar el arma
@@ -25,4 +25,4 @@ func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		# Si el jugador se aleja del arma, cambia el booleano a false y oculta el texto
 		player_nearby = false
-		$Label.show()
+		$Label.hide()
