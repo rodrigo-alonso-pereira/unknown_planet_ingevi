@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://crik547sd1wa7"]
+
+[ext_resource type="Script" uid="uid://dk6p05s0rp2ej" path="res://objects/weapon_pickup.gd" id="1_2snad"]
+[ext_resource type="Texture2D" uid="uid://cp66exkoeuhsy" path="res://art/weapons/gun.PNG" id="1_6h43e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2snad"]
+size = Vector2(69, 25)
+
+[node name="Area2D" type="Area2D" unique_id=1111525667]
+script = ExtResource("1_2snad")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=563537829]
+position = Vector2(6.9999995, 10.999999)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_6h43e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1080710274]
+position = Vector2(-3.5, 0.5)
+shape = SubResource("RectangleShape2D_2snad")
+
+[node name="Label" type="Label" parent="." unique_id=212392387]
+offset_top = -40.0
+offset_right = 86.0
+offset_bottom = -17.0
+theme_override_colors/font_color = Color(0.95, 0.98, 0.13, 1)
+theme_override_colors/font_shadow_color = Color(0.08, 0.04, 0.16, 0.6)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 4
+text = "[E] Recoger"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
