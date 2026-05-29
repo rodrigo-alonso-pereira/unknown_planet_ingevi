@@ -4,21 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://cp66exkoeuhsy" path="res://art/weapons/gun.PNG" id="1_6h43e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2snad"]
-size = Vector2(69, 25)
+size = Vector2(16, 7)
 
-[node name="Area2D" type="Area2D" unique_id=1111525667]
+[node name="WeaponPickup" type="Area2D" unique_id=1111525667]
 script = ExtResource("1_2snad")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=563537829]
-position = Vector2(6.9999995, 10.999999)
-scale = Vector2(0.2, 0.2)
+position = Vector2(1.9999999, 1.9999999)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_6h43e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1080710274]
-position = Vector2(-3.5, 0.5)
+position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_2snad")
 
 [node name="Label" type="Label" parent="." unique_id=212392387]
+visible = false
 offset_top = -40.0
 offset_right = 86.0
 offset_bottom = -17.0
