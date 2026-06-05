@@ -18,11 +18,13 @@ func _process(_delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		# Si el jugador se acerca al arma, cambia el booleano a true y muestra el texto para recoger el arma
+		print("Near weapon")
 		player_nearby = true
 		$Label.show()
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		# Si el jugador se aleja del arma, cambia el booleano a false y oculta el texto
+		print("Exit weapon")
 		player_nearby = false
 		$Label.hide()
