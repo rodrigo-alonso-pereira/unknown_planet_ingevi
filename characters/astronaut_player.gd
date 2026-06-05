@@ -24,9 +24,12 @@ func _physics_process(delta: float) -> void:
 	move(direction, delta)
 	# Recibe hacia donde mira el personaje para actualizar el BlendSpace
 	animate(direction)
+	# Verificacion de interaccion
+	if Input.is_action_just_pressed("interact"):
+		anim_tree.set("parameters/ActionStateMachine/PickingUp/blend_position", last_direction)
 	# Verificacion de disparo
 	if has_weapon and Input.is_action_just_pressed("shoot"):
-		shoot()
+		print("arma equipada")
 
 func move(direction: Vector2, delta: float) -> void:
 	if direction != Vector2.ZERO:
@@ -60,35 +63,35 @@ func animate(direction: Vector2) -> void:
 func equip_weapon() -> void:
 	has_weapon = true
 	print("Arma de astronauta equipada con éxito")
-
-func shoot() -> void:
-	if bullet_scene == null:
-		return
-		
-	# Instanciamos el proyectil balístico en tiempo de ejecución
-	var bullet_instance = bullet_scene.instantiate()
 	
-	# Calculamos el vector de salida horizontal basado en la orientación del personaje
-	var shoot_direction = Vector2.RIGHT
-	if sprite.flip_h:
-		shoot_direction = Vector2.LEFT
-		
-	# Añadimos el proyectil al nodo raíz del nivel para independizar su trayectoria física
-	get_parent().add_child(bullet_instance)
-	
-	# Posicionamos la bala en el origen del jugador
-	bullet_instance.global_position = global_position
-	bullet_instance.rotation = shoot_direction.angle()
-	
-	# Reproducción del AudioStreamPlayer sin distorsión
-	if shoot_sound:
-		shoot_sound.play()
-		
-	# Squash & Stretch del cuerpo del astronauta al disparar
-	apply_shoot_kickback()
-
-func apply_shoot_kickback() -> void:
-	# Deformación dinámica del sprite usando interpolación por Tween
-	var tween = create_tween()
-	tween.tween_property(sprite, "scale", Vector2(0.85, 1.15), 0.04)
-	tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.08)
+#func shoot() -> void:
+	#if bullet_scene == null:
+		#return
+		#
+	## Instanciamos el proyectil balístico en tiempo de ejecución
+	#var bullet_instance = bullet_scene.instantiate()
+	#
+	## Calculamos el vector de salida horizontal basado en la orientación del personaje
+	#var shoot_direction = Vector2.RIGHT
+	#if sprite.flip_h:
+		#shoot_direction = Vector2.LEFT
+		#
+	## Añadimos el proyectil al nodo raíz del nivel para independizar su trayectoria física
+	#get_parent().add_child(bullet_instance)
+	#
+	## Posicionamos la bala en el origen del jugador
+	#bullet_instance.global_position = global_position
+	#bullet_instance.rotation = shoot_direction.angle()
+	#
+	## Reproducción del AudioStreamPlayer sin distorsión
+	#if shoot_sound:
+		#shoot_sound.play()
+		#
+	## Squash & Stretch del cuerpo del astronauta al disparar
+	#apply_shoot_kickback()
+#
+#func apply_shoot_kickback() -> void:
+	## Deformación dinámica del sprite usando interpolación por Tween
+	#var tween = create_tween()
+	#tween.tween_property(sprite, "scale", Vector2(0.85, 1.15), 0.04)
+	#tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.08)
