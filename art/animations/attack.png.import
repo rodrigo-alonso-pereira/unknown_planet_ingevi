@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbejrg3b57bnq"
-path="res://.godot/imported/astronaut_gun.png-f770f492f9b3018abf677473624da995.ctex"
+uid="uid://cvx2iky807t0l"
+path="res://.godot/imported/attack.png-25b49d0efe6183ce8103ae9b8db2f5f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/astronaut_gun.png"
-dest_files=["res://.godot/imported/astronaut_gun.png-f770f492f9b3018abf677473624da995.ctex"]
+source_file="res://art/animations/attack.png"
+dest_files=["res://.godot/imported/attack.png-25b49d0efe6183ce8103ae9b8db2f5f7.ctex"]
 
 [params]
 
