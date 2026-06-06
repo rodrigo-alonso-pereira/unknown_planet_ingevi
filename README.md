@@ -40,3 +40,25 @@ Siga estos pasos para clonar y ejecutar el prototipo correctamente:
     * Presione **F5** (o el botón Play en la esquina superior derecha) para iniciar la simulación.
 
 ---
+## 🕹️ Instrucciones para Jugar
+
+El objetivo es sobrevivir en un planeta hostil: recolectar recursos farmeando, repara tu nave interactuando con ella y defiéndete de los enemigos con tu ataque de corto rango.
+
+### Controles
+
+| Acción | Teclado | Gamepad |
+|---|---|---|
+| Mover arriba | `W` | Joypad axis 1 − |
+| Mover abajo | `S` | Joypad axis 1 + |
+| Mover izquierda | `A` | Joypad axis 0 − |
+| Mover derecha | `D` | Joypad axis 0 + |
+| Ataque de corto rango | `Espacio` | Button 1 |
+| Interactuar | `E` | Button 2 |
+| Farmear | `Q` | Button 3 |
+
+### Mecánicas principales
+
+* **Movimiento:** Usa `WASD` para desplazarte por el planeta. El personaje tiene aceleración y fricción, por lo que el movimiento es fluido.
+* **Ataque:** Presiona `Espacio` para atacar con tu arma de corto rango. No puedes moverte mientras atacas.
+* **Farmear:** Presiona `Q` cerca de recursos del entorno para recolectarlos. Son necesarios para reparar la nave.
+* **Interactuar:** Presiona `E` para interactuar con objetos del escenario, como la nave o ítems recogibles.
