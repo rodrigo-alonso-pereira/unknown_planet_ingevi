@@ -6,30 +6,35 @@ const acceleration = 800
 const friction = 1000
 # Variable que recuerda la ultima posicion hacia donde miró el personaje
 var last_direction := Vector2.DOWN
-# Control de estado para la mecánica principal
-var has_weapon := false
-# Carga de la escena de la bala
-@export var bullet_scene: PackedScene
+var hitbox_offset: Vector2
 
-@onready var anim_tree = $Animation/AnimationTree
-@onready var move_state_machine = anim_tree.get("parameters/MoveStateMachine/playback")
-@onready var sprite = Sprite2D
-@onready var shoot_sound = $ShootSound
+@onready var move_state_machine = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
+@onready var action_state_machine = $Animation/AnimationTree.get("parameters/ActionStateMachine/playback")
+@onready var swing_sword: AudioStreamPlayer2D = $SwingSword
+@onready var swing_pickaxe: AudioStreamPlayer2D = $SwingPickaxe
+@onready var hitbox: Area2D = $Hitbox
 
+
+func _ready() -> void:
+	# Inicializa el offset del hitobx
+	hitbox_offset = hitbox.position
 
 func _physics_process(delta: float) -> void:
-	# Caputa el input una única vez por frame
-	var direction := Input.get_vector("left", "right", "up", "down")
-	# Recibe hacia donde ir (direction) y caunto tiempo ha pasado (delta)
-	move(direction, delta)
-	# Recibe hacia donde mira el personaje para actualizar el BlendSpace
-	animate(direction)
-	# Verificacion de interaccion
-	if Input.is_action_just_pressed("interact"):
-		anim_tree.set("parameters/ActionStateMachine/PickingUp/blend_position", last_direction)
-	# Verificacion de disparo
-	if has_weapon and Input.is_action_just_pressed("shoot"):
-		print("arma equipada")
+	# Comprueba si el OneShot está activo (si el personaje está atacando/recogiendo/farmeando)
+	var is_acting: bool = bool($Animation/AnimationTree.get("parameters/OneShot/active"))
+	# Escucha si el jugador presiona botones de acción
+	get_basic_input(is_acting)
+	if not is_acting:
+		# Si NO está actuando, le permitimos moverse y caminar
+		# Caputa el input una única vez por frame
+		var direction := Input.get_vector("left", "right", "up", "down")
+		# Recibe hacia donde ir (direction) y caunto tiempo ha pasado (delta)
+		move(direction, delta)
+		# Recibe hacia donde mira el personaje para actualizar el BlendSpace
+		animate(direction)
+	else:
+		# Si ESTÁ actuando, forzamos un input de ZERO para que frene con fricción
+		move(Vector2.ZERO, delta)
 
 func move(direction: Vector2, delta: float) -> void:
 	if direction != Vector2.ZERO:
@@ -50,48 +55,67 @@ func animate(direction: Vector2) -> void:
 		# Redondeamos el vector para que el BlendSpace reciba coordenadas exactas 
 		# (-1, 0 o 1) y no valores decimales que puedan confundir la mezcla de la animacion
 		last_direction = Vector2(round(direction.x), round(direction.y))
+		update_hitbox_offset()
 		# Le pasamos la dirección a AMBOS BlendSpaces (para que al frenar sepa hacia dónde mirar)
-		anim_tree.set("parameters/MoveStateMachine/Walk/blend_position", last_direction)
-		anim_tree.set("parameters/MoveStateMachine/Idle/blend_position", last_direction)
+		$Animation/AnimationTree.set("parameters/MoveStateMachine/Walk/blend_position", last_direction)
+		$Animation/AnimationTree.set("parameters/MoveStateMachine/Idle/blend_position", last_direction)
 		
 		# Viajamos al estado de Caminar
 		move_state_machine.travel("Walk")
 	else:
 		# Si no hay input, viajamos al estado Quieto (Idle)
 		move_state_machine.travel("Idle")
-# Función llamada por weapon_pickup al interactuar
-func equip_weapon() -> void:
-	has_weapon = true
-	print("Arma de astronauta equipada con éxito")
+		
+func get_basic_input(is_acting: bool):
+	# --- ACCIÓN: ATACAR ---
+	if Input.is_action_just_pressed("attack") and not is_acting:
+		print("attack")
+		swing_sword.play()
+		# Le decimos a la máquina de acción hacia dónde mirar
+		$Animation/AnimationTree.set("parameters/ActionStateMachine/Attack/blend_position", last_direction)
+		# Viaja al estado correcto
+		action_state_machine.travel("Attack")
+		# Disparamos el OneShot (acción)
+		$Animation/AnimationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-#func shoot() -> void:
-	#if bullet_scene == null:
-		#return
-		#
-	## Instanciamos el proyectil balístico en tiempo de ejecución
-	#var bullet_instance = bullet_scene.instantiate()
-	#
-	## Calculamos el vector de salida horizontal basado en la orientación del personaje
-	#var shoot_direction = Vector2.RIGHT
-	#if sprite.flip_h:
-		#shoot_direction = Vector2.LEFT
-		#
-	## Añadimos el proyectil al nodo raíz del nivel para independizar su trayectoria física
-	#get_parent().add_child(bullet_instance)
-	#
-	## Posicionamos la bala en el origen del jugador
-	#bullet_instance.global_position = global_position
-	#bullet_instance.rotation = shoot_direction.angle()
-	#
-	## Reproducción del AudioStreamPlayer sin distorsión
-	#if shoot_sound:
-		#shoot_sound.play()
-		#
-	## Squash & Stretch del cuerpo del astronauta al disparar
-	#apply_shoot_kickback()
-#
-#func apply_shoot_kickback() -> void:
-	## Deformación dinámica del sprite usando interpolación por Tween
-	#var tween = create_tween()
-	#tween.tween_property(sprite, "scale", Vector2(0.85, 1.15), 0.04)
-	#tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.08)
+	# --- ACCIÓN: FARMEAR ---
+	if Input.is_action_just_pressed("farm") and not is_acting:
+		print("farm")
+		swing_pickaxe.play()
+		# Le decimos a la máquina de acción hacia dónde mirar
+		$Animation/AnimationTree.set("parameters/ActionStateMachine/Farm/blend_position", last_direction)
+		# Viaja al estado correcto
+		action_state_machine.travel("Farm")
+		# Disparamos el OneShot (acción)
+		$Animation/AnimationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		
+	# --- ACCIÓN: INTERACTUAR (Recoger) ---
+	if Input.is_action_just_pressed("interact") and not is_acting:
+		print("interact")
+		# Le decimos a la máquina de acción hacia dónde mirar
+		$Animation/AnimationTree.set("parameters/ActionStateMachine/PickingUp/blend_position", last_direction)
+		# Viaja al estado correcto
+		action_state_machine.travel("PickingUp")
+		# Disparamos el OneShot (acción)
+		$Animation/AnimationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		
+# Actualiza la posición de la hitbox según la última dirección registrada del personaje
+func update_hitbox_offset() -> void:
+	# valores iniciales de los ejes X e Y
+	var x := hitbox_offset.x
+	var y := hitbox_offset.y
+	
+	# Evalúa el vector de dirección para reasignar la posición espacial de la hitbox
+	match last_direction:
+		Vector2.LEFT:
+			# Desplaza la hitbox hacia el lado izquierdo invirtiendo el valor horizontal
+			hitbox.position = Vector2(-x, y)
+		Vector2.RIGHT:
+			# Mantiene el desplazamiento original apuntando hacia el lado derecho
+			hitbox.position = Vector2(x, y)
+		Vector2.UP:
+			# Intercambia y ajusta las coordenadas para posicionar la hitbox en la parte superior
+			hitbox.position = Vector2(y, -x)
+		Vector2.DOWN:
+			# Intercambia y ajusta las coordenadas para posicionar la hitbox en la parte inferior
+			hitbox.position = Vector2(-y, x)
