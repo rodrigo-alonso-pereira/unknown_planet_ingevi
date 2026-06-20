@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3n1gaqrtqmpa"]
 
 [ext_resource type="Script" uid="uid://bs5k6o81dt1lj" path="res://characters/astronaut_player.gd" id="1_dlna3"]
-[ext_resource type="Texture2D" uid="uid://blu3i3dqdwpkq" path="res://art/characters/astronaut.png" id="2_8h3dr"]
+[ext_resource type="Texture2D" uid="uid://bh1kxp1hrpmq0" path="res://art/characters/Astronaut.png" id="2_8h3dr"]
 [ext_resource type="Script" uid="uid://cyct7ruptadmg" path="res://characters/camera_2d.gd" id="3_6pd50"]
 [ext_resource type="AudioStream" uid="uid://bu2ofbv6crrf0" path="res://sound/attack.wav" id="4_8h3dr"]
 [ext_resource type="AudioStream" uid="uid://bekh2r3hcqovq" path="res://sound/pickaxe.wav" id="5_66drl"]
@@ -803,7 +803,6 @@ graph_offset = Vector2(-363.53586, -134.92804)
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_g1fp3"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_x2yl3"]
-graph_offset = Vector2(-754.0389, 22.610949)
 nodes/output/position = Vector2(560, 160)
 nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_21ceh")
 nodes/MoveStateMachine/position = Vector2(-240, 140)
@@ -821,6 +820,7 @@ height = 18.0
 size = Vector2(20, 15)
 
 [node name="AstronautPlayer" type="CharacterBody2D" unique_id=555874912 groups=["player"]]
+light_mask = 2
 script = ExtResource("1_dlna3")
 
 [node name="Animation" type="Node" parent="." unique_id=542113588]
@@ -853,9 +853,11 @@ shape = SubResource("CapsuleShape2D_1kks7")
 [node name="Hitbox" type="Area2D" parent="." unique_id=838572818]
 position = Vector2(22, 1.9073486e-06)
 scale = Vector2(1.5, 1.5)
+collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1258704388]
+light_mask = 2
 position = Vector2(2.9802322e-08, -1.1920929e-06)
 shape = SubResource("RectangleShape2D_66drl")
 
@@ -868,3 +870,5 @@ stream = ExtResource("4_8h3dr")
 
 [node name="SwingPickaxe" type="AudioStreamPlayer2D" parent="." unique_id=2067544577]
 stream = ExtResource("5_66drl")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -7,6 +7,10 @@ const friction = 1000
 # Variable que recuerda la ultima posicion hacia donde miró el personaje
 var last_direction := Vector2.DOWN
 var hitbox_offset: Vector2
+# Bandera para el ataque
+var is_attacking: bool = false
+# Daño base del personaje
+var strength: int = 20
 
 @onready var move_state_machine = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var action_state_machine = $Animation/AnimationTree.get("parameters/ActionStateMachine/playback")
@@ -70,6 +74,7 @@ func get_basic_input(is_acting: bool):
 	# --- ACCIÓN: ATACAR ---
 	if Input.is_action_just_pressed("attack") and not is_acting:
 		print("attack")
+		is_attacking = true
 		swing_sword.play()
 		# Le decimos a la máquina de acción hacia dónde mirar
 		$Animation/AnimationTree.set("parameters/ActionStateMachine/Attack/blend_position", last_direction)
@@ -77,6 +82,21 @@ func get_basic_input(is_acting: bool):
 		action_state_machine.travel("Attack")
 		# Disparamos el OneShot (acción)
 		$Animation/AnimationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		
+		# Revisa objetos dentro de la hitbox al atacar
+		var near_bodies = hitbox.get_overlapping_bodies()
+		
+		# Recorremos la lista de cuerpos detectados
+		for body in near_bodies:
+			if body.is_in_group("enemies"):
+				body.take_damage(strength, position)
+				print(body.name, " Hit! (Daño estático)")
+		
+		# Pausa la ejecución hasta finalizar la animación
+		await get_tree().create_timer(0.8).timeout 
+		
+		# Baja la bandera cuando el ataque termina
+		is_attacking = false
 	
 	# --- ACCIÓN: FARMEAR ---
 	if Input.is_action_just_pressed("farm") and not is_acting:
@@ -119,3 +139,9 @@ func update_hitbox_offset() -> void:
 		Vector2.DOWN:
 			# Intercambia y ajusta las coordenadas para posicionar la hitbox en la parte inferior
 			hitbox.position = Vector2(-y, x)
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if is_attacking and body.is_in_group("enemies"):
+		body.take_damage(strength, position)
+		print(body.name, " Hit! (Daño dinámico)")
