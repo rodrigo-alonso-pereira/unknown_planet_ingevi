@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh1kxp1hrpmq0"
-path="res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"
+uid="uid://bu76w58udl3i1"
+path="res://.godot/imported/LifeBarMiniProgress.png-457c6c560f3eabec71a4cb1ee41a7070.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Astronaut.png"
-dest_files=["res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"]
+source_file="res://art/UI/LifeBarMiniProgress.png"
+dest_files=["res://.godot/imported/LifeBarMiniProgress.png-457c6c560f3eabec71a4cb1ee41a7070.ctex"]
 
 [params]
 
