@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal died
+
+signal health_changed(new_health: int)
 
 const speed = 200
 const acceleration = 800
@@ -9,36 +12,47 @@ var last_direction := Vector2.DOWN
 var hitbox_offset: Vector2
 # Bandera para el ataque
 var is_attacking: bool = false
+# Bandera para saber si el personaje está vivo
+var is_alive: bool = true
 # Daño base del personaje
-var strength: int = 20
+var strength: int
+var max_health: int
+var health: int
 
 @onready var move_state_machine = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var action_state_machine = $Animation/AnimationTree.get("parameters/ActionStateMachine/playback")
-@onready var swing_sword: AudioStreamPlayer2D = $SwingSword
-@onready var swing_pickaxe: AudioStreamPlayer2D = $SwingPickaxe
+@onready var swing_sword_sound: AudioStreamPlayer2D = $SwingSword
+@onready var swing_pickaxe_sound: AudioStreamPlayer2D = $SwingPickaxe
 @onready var hitbox: Area2D = $Hitbox
+@onready var take_damage_sound: AudioStreamPlayer2D = $TakeDamage
+@onready var damage_cooldown: Timer = $DamageCooldown
 
 
 func _ready() -> void:
+	# Carga las stats del personaje
+	health = AstronautPlayerStats.health
+	max_health = AstronautPlayerStats.max_health
+	strength = AstronautPlayerStats.strength
 	# Inicializa el offset del hitobx
 	hitbox_offset = hitbox.position
 
 func _physics_process(delta: float) -> void:
-	# Comprueba si el OneShot está activo (si el personaje está atacando/recogiendo/farmeando)
-	var is_acting: bool = bool($Animation/AnimationTree.get("parameters/OneShot/active"))
-	# Escucha si el jugador presiona botones de acción
-	get_basic_input(is_acting)
-	if not is_acting:
-		# Si NO está actuando, le permitimos moverse y caminar
-		# Caputa el input una única vez por frame
-		var direction := Input.get_vector("left", "right", "up", "down")
-		# Recibe hacia donde ir (direction) y caunto tiempo ha pasado (delta)
-		move(direction, delta)
-		# Recibe hacia donde mira el personaje para actualizar el BlendSpace
-		animate(direction)
-	else:
-		# Si ESTÁ actuando, forzamos un input de ZERO para que frene con fricción
-		move(Vector2.ZERO, delta)
+	if is_alive:
+		# Comprueba si el OneShot está activo (si el personaje está atacando/recogiendo/farmeando)
+		var is_acting: bool = bool($Animation/AnimationTree.get("parameters/OneShot/active"))
+		# Escucha si el jugador presiona botones de acción
+		get_basic_input(is_acting)
+		if not is_acting:
+			# Si NO está actuando, le permitimos moverse y caminar
+			# Caputa el input una única vez por frame
+			var direction := Input.get_vector("left", "right", "up", "down")
+			# Recibe hacia donde ir (direction) y caunto tiempo ha pasado (delta)
+			move(direction, delta)
+			# Recibe hacia donde mira el personaje para actualizar el BlendSpace
+			animate(direction)
+		else:
+			# Si ESTÁ actuando, forzamos un input de ZERO para que frene con fricción
+			move(Vector2.ZERO, delta)
 
 func move(direction: Vector2, delta: float) -> void:
 	if direction != Vector2.ZERO:
@@ -75,7 +89,7 @@ func get_basic_input(is_acting: bool):
 	if Input.is_action_just_pressed("attack") and not is_acting:
 		print("attack")
 		is_attacking = true
-		swing_sword.play()
+		swing_sword_sound.play()
 		# Le decimos a la máquina de acción hacia dónde mirar
 		$Animation/AnimationTree.set("parameters/ActionStateMachine/Attack/blend_position", last_direction)
 		# Viaja al estado correcto
@@ -101,7 +115,7 @@ func get_basic_input(is_acting: bool):
 	# --- ACCIÓN: FARMEAR ---
 	if Input.is_action_just_pressed("farm") and not is_acting:
 		print("farm")
-		swing_pickaxe.play()
+		swing_pickaxe_sound.play()
 		# Le decimos a la máquina de acción hacia dónde mirar
 		$Animation/AnimationTree.set("parameters/ActionStateMachine/Farm/blend_position", last_direction)
 		# Viaja al estado correcto
@@ -145,3 +159,23 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if is_attacking and body.is_in_group("enemies"):
 		body.take_damage(strength, position)
 		print(body.name, " Hit! (Daño dinámico)")
+
+func take_damage(amount: int) -> void:
+	if is_alive:
+		if damage_cooldown.time_left > 0:
+			return
+		take_damage_sound.play()
+		health -= amount
+		AstronautPlayerStats.health = health
+		emit_signal("health_changed", health)
+		if health <= 0:
+			die()
+		# Personaje es invensible por un periodo de tiempo para no recibir multiples ataques simultaneos
+		damage_cooldown.start()
+
+func die() -> void:
+	# Crear animación para cuando el personaje muere
+	print("You are dead")
+	is_alive = false
+	# Espera a que termine la animación antes de emitir la señal
+	died.emit()

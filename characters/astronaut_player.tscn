@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cyct7ruptadmg" path="res://characters/camera_2d.gd" id="3_6pd50"]
 [ext_resource type="AudioStream" uid="uid://bu2ofbv6crrf0" path="res://sound/attack.wav" id="4_8h3dr"]
 [ext_resource type="AudioStream" uid="uid://bekh2r3hcqovq" path="res://sound/pickaxe.wav" id="5_66drl"]
+[ext_resource type="AudioStream" uid="uid://dw3wo8vlo4nd1" path="res://sound/hit_player.wav" id="6_q0hhv"]
 
 [sub_resource type="Animation" id="Animation_1kks7"]
 length = 0.001
@@ -870,5 +871,12 @@ stream = ExtResource("4_8h3dr")
 
 [node name="SwingPickaxe" type="AudioStreamPlayer2D" parent="." unique_id=2067544577]
 stream = ExtResource("5_66drl")
+
+[node name="TakeDamage" type="AudioStreamPlayer2D" parent="." unique_id=494448849]
+stream = ExtResource("6_q0hhv")
+
+[node name="DamageCooldown" type="Timer" parent="." unique_id=1973256325]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
