@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bw1yihk7tmb63" path="res://art/UI/Heart_full.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://dij3oivw2rbpa" path="res://scenes/hud.gd" id="1_oo0fn"]
+[ext_resource type="AudioStream" uid="uid://lys6y0kcnqru" path="res://sound/death.wav" id="3_5ysmq"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1279054340]
 script = ExtResource("1_oo0fn")
@@ -44,3 +45,52 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="GameOverMenu" type="Control" parent="." unique_id=1544014679]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu" unique_id=1445749899]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -46.5
+offset_right = 51.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="DeathText" type="Label" parent="GameOverMenu/VBoxContainer" unique_id=560313614]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.90257204, 1.347661e-06, 0.47872794, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 64
+text = "HAS MUERTO"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverMenu/VBoxContainer" unique_id=2081288872]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Reiniciar"
+
+[node name="QuitButton" type="Button" parent="GameOverMenu/VBoxContainer" unique_id=1335039298]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Salir"
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=1684178001]
+stream = ExtResource("3_5ysmq")

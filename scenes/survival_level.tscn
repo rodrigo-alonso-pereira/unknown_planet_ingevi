@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://d4bh1xfk8bqjl" path="res://objects/spaceship.tscn" id="1_tlvit"]
 [ext_resource type="PackedScene" uid="uid://dc8utasqc6jw2" path="res://objects/crater.tscn" id="2_06pc3"]
 [ext_resource type="PackedScene" uid="uid://bo7q3i082cxa2" path="res://characters/slime.tscn" id="5_06pc3"]
-[ext_resource type="PackedScene" uid="uid://cyyp25ds1m6mr" path="res://scenes/hud.tscn" id="6_jt7p3"]
 
 [node name="SurvivalLevel" type="Node2D" unique_id=199767071]
 y_sort_enabled = true
@@ -35,5 +34,3 @@ position = Vector2(419, 269)
 
 [node name="Slime3" parent="Objects" unique_id=1798995867 instance=ExtResource("5_06pc3")]
 position = Vector2(-348, 238)
-
-[node name="HUD" parent="." unique_id=1279054340 instance=ExtResource("6_jt7p3")]
