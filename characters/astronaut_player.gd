@@ -167,7 +167,10 @@ func take_damage(amount: int) -> void:
 		take_damage_sound.play()
 		health -= amount
 		AstronautPlayerStats.health = health
-		emit_signal("health_changed", health)
+		# Emite señal de daño
+		print("Jugador recibe daño. Emitiendo health_changed: ", health)
+		health_changed.emit(health)
+		print("Vida restante: ", health)
 		if health <= 0:
 			die()
 		# Personaje es invensible por un periodo de tiempo para no recibir multiples ataques simultaneos
@@ -177,5 +180,11 @@ func die() -> void:
 	# Crear animación para cuando el personaje muere
 	print("You are dead")
 	is_alive = false
+	# Apaga el AnimationTree para que deje de controlar al personaje
+	$Animation/AnimationTree.active = false
+	# Reproduce la animación de muerte
+	$Animation/AnimationPlayer.play("die")
+	# Pausa la ejecución de esta función hasta que la animación termine
+	await $Animation/AnimationPlayer.animation_finished
 	# Espera a que termine la animación antes de emitir la señal
 	died.emit()

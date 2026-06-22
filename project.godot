@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Unknown_Planet"
-run/main_scene="uid://c3imms0bxlkyb"
+run/main_scene="uid://56etxf2ucrob"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
