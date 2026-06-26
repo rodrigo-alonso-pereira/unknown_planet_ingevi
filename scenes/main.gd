@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var hud: CanvasLayer = $HUD
-
+var level: int = 1
 var current_level_root: Node = null
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
 
@@ -15,26 +15,32 @@ func _ready() -> void:
 	hud.restart_requested.connect(_on_restart_requested)
 	hud.quit_requested.connect(_on_quit_requested)
 	
-	current_level_root = get_node("SurvivalLevel")
+	current_level_root = get_node("LevelRoot")
 	
 	if current_level_root:
 		# Conectamos las señales del jugador apenas inicia el juego
-		_setup_level(current_level_root)
+		_load_level(level)
 		# Le inyectamos la vida máxima real al HUD para que dibuje los 5 corazones
 		hud._update_health(AstronautPlayerStats.health)
 		# Reproduce la música inicial apenas el juego arranca
 		_play_background_music()
 	else:
-		print("CRÍTICO: Main no encontró el nodo SurvivalLevel")
+		print("CRÍTICO: Main no encontró el nodo LevelRoot")
 
-func _load_level() -> void:
+func _on_exit_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		level += 1
+		call_deferred("_load_level", level)
+		
+
+func _load_level(level_number: int) -> void:
 	if current_level_root:
 		current_level_root.queue_free()
 	
-	var level_path = "res://scenes/survival_level.tscn"
+	var level_path = "res://scenes/levels/level_%s.tscn" % level_number
 	current_level_root = load(level_path).instantiate()
 	add_child(current_level_root)
-	current_level_root.name = "SurvivalLevel"
+	current_level_root.name = "LevelRoot"
 	# Espera 1 frame para asegurar que el nivel viejo se borró por completo
 	await get_tree().process_frame
 	# Reproduce la música inicial
@@ -42,6 +48,10 @@ func _load_level() -> void:
 	_setup_level(current_level_root)
 
 func _setup_level(level_root: Node) -> void:
+	# Conecta la salida del nivel
+	var exit = level_root.get_node_or_null("Exit")
+	if exit:
+		exit.body_entered.connect(_on_exit_body_entered)
 	# Buscamos al jugador por su grupo
 	var player = level_root.get_node_or_null("Objects/AstronautPlayer")
 	if player:
@@ -85,8 +95,8 @@ func _on_restart_requested() -> void:
 	AstronautPlayerStats.reset()
 	hud._update_health(AstronautPlayerStats.health)
 	
-	# Recargamos el nivel
-	_load_level()
+	# Recargamos en el nivel 1
+	_load_level(1)
 	
 	# Quitamos el fondo negro
 	await hud.fade(0.0)

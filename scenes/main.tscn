@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://56etxf2ucrob"]
 
-[ext_resource type="PackedScene" uid="uid://c3imms0bxlkyb" path="res://scenes/survival_level.tscn" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://c3imms0bxlkyb" path="res://scenes/level_root.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bs6hejijuku5" path="res://scenes/main.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cyyp25ds1m6mr" path="res://scenes/hud.tscn" id="2_sugp2"]
 [ext_resource type="AudioStream" uid="uid://c13bg2bdroa82" path="res://sound/main_theme.wav" id="4_jyhfs"]
@@ -8,7 +8,8 @@
 [node name="Main" type="Node2D" unique_id=486681285]
 script = ExtResource("1_sugp2")
 
-[node name="SurvivalLevel" parent="." unique_id=199767071 instance=ExtResource("1_0wfyh")]
+[node name="LevelRoot" parent="." unique_id=199767071 instance=ExtResource("1_0wfyh")]
+position = Vector2(-6, 39)
 
 [node name="HUD" parent="." unique_id=1279054340 instance=ExtResource("2_sugp2")]
 
