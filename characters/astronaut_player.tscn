@@ -162,7 +162,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [58, 59, 60, 61, 59]
+"values": [57, 58, 59, 60, 61]
 }
 
 [sub_resource type="Animation" id="Animation_io0hj"]
@@ -177,7 +177,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [63, 64, 65, 66, 67]
+"values": [62, 63, 64, 65, 66]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -231,7 +231,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [68, 69, 70, 71, 72]
+"values": [67, 68, 69, 70, 71]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -835,8 +835,8 @@ nodes/OneShot/position = Vector2(200, 100)
 node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"MoveStateMachine", &"OneShot", 1, &"ActionStateMachine"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kks7"]
-radius = 9.0
-height = 18.0
+radius = 16.0
+height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66drl"]
 size = Vector2(20, 15)
@@ -870,6 +870,7 @@ hframes = 6
 vframes = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=869951004]
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_1kks7")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=838572818]
@@ -885,6 +886,10 @@ shape = SubResource("RectangleShape2D_66drl")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667921481]
 zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
 script = ExtResource("3_6pd50")
 
 [node name="SwingSword" type="AudioStreamPlayer2D" parent="." unique_id=1872536229]
