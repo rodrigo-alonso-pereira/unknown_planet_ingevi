@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bphhltxautpqj"]
+
+[ext_resource type="PackedScene" uid="uid://c3imms0bxlkyb" path="res://scenes/levels/level_root.tscn" id="1_o8c3j"]
+[ext_resource type="PackedScene" uid="uid://bo7q3i082cxa2" path="res://characters/slime.tscn" id="2_44gv1"]
+
+[node name="LevelRoot" unique_id=199767071 instance=ExtResource("1_o8c3j")]
+
+[node name="Slime" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="1" unique_id=1936246128]
+position = Vector2(1085, 960)
+
+[node name="Slime2" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="2" unique_id=2144898898]
+position = Vector2(461, 962)
+
+[node name="Slime3" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="3" unique_id=263104441 instance=ExtResource("2_44gv1")]
+position = Vector2(769, 969)
+
+[node name="Slime4" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="4" unique_id=559523772 instance=ExtResource("2_44gv1")]
+position = Vector2(429, 666)
+
+[node name="Slime5" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="5" unique_id=813279137 instance=ExtResource("2_44gv1")]
+position = Vector2(999, 679)
+
+[node name="Slime6" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="6" unique_id=1234899387 instance=ExtResource("2_44gv1")]
+position = Vector2(538, 390)
