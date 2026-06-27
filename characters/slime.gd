@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal died  # <-- NUEVO: avisamos cuando el slime muere
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var take_damage_sound: AudioStreamPlayer2D = $TakeDamage
 @onready var health_bar: Node2D = $HealthBar
@@ -22,7 +24,6 @@ func _physics_process(delta: float) -> void:
 func _attack(delta: float) -> void:
 	var direction = (target.position - position).normalized()
 	position += direction * SPEED * delta
-	# Solo llamamos a play() si la animación NO se está reproduciendo ya
 	if animated_sprite_2d.animation != "attack":
 		animated_sprite_2d.play("attack")
 		
@@ -33,7 +34,6 @@ func take_damage(damage: int, attacker_postion: Vector2) -> void:
 		_die()
 	else:
 		take_damage_sound.play()
-		# Knockback
 		var knockback_direction = (position - attacker_postion).normalized()
 		var target_position = position + knockback_direction * KNOCKBACK_FORCE
 		
@@ -50,19 +50,21 @@ func _die() -> void:
 	take_damage_sound.pitch_scale = 0.5
 	take_damage_sound.play()
 	
-	# Desactiva la colision
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sight/CollisionShape2D.set_deferred("disabled", true)
 	
+	# Esperamos que termine la animación antes de emitir y borrar
+	await animated_sprite_2d.animation_finished
+	died.emit()  # <-- NUEVO
+	queue_free()
+
 
 func _on_sight_body_entered(body: Node2D) -> void:
-	print("En rango: ", body.get_groups())
 	if body.is_in_group("player"):
 		target = body
 
 
 func _on_sight_body_exited(body: Node2D) -> void:
-	print("Fuera de rango: ", body.get_groups())
 	if body.is_in_group("player") and is_alive:
 		target = null
 
