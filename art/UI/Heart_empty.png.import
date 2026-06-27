@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vyqdv11emsl"
-path="res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"
+uid="uid://btvge88ril7wo"
+path="res://.godot/imported/Heart_empty.png-7dd9255193885fd595543dd1998c1b3c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Astronaut.png"
-dest_files=["res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"]
+source_file="res://art/UI/Heart_empty.png"
+dest_files=["res://.godot/imported/Heart_empty.png-7dd9255193885fd595543dd1998c1b3c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vyqdv11emsl"
-path="res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"
+uid="uid://dnrs4lmskjjep"
+path="res://.godot/imported/Grass_Middle.png-349aa77430584bf308b958bfb9ea8803.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Astronaut.png"
-dest_files=["res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"]
+source_file="res://art/environment/Grass_Middle.png"
+dest_files=["res://.godot/imported/Grass_Middle.png-349aa77430584bf308b958bfb9ea8803.ctex"]
 
 [params]
 

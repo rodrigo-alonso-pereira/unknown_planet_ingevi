@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Unknown_Planet"
-run/main_scene="uid://c3imms0bxlkyb"
+config/name="Unknown_Planet_WORKING"
+run/main_scene="uid://56etxf2ucrob"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+AstronautPlayerStats="*uid://dhcbnhp7nl1hh"
 
 [display]
 
@@ -23,6 +27,7 @@ window/size/viewport_height=1080
 [global_group]
 
 player=""
+enemies=""
 
 [input]
 

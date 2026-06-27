@@ -11,7 +11,7 @@ Este proyecto es parte del curso **INGENIERÍA DE VIDEOJUEGOS: FUNDAMENTOS Y APL
 
 ## 🎮 Nombre del Proyecto
 **Unknown Planet**
-Es un videojuego de supervivencia en 2D donde un astronauta debe aterrizar forzosamente en un planeta hostil, recolectar recursos y defenderse de oleadas de ataques para reparar su nave.
+Es un videojuego de supervivencia y exploración en 2D. Un astronauta debe aterrizar forzosamente en un planeta hostil, abriéndose paso a través de diferentes biomas, derrotando enemigos (Slimes), recolectando recursos y sobreviviendo para encontrar la salida y lograr escapar.
 
 ## 🛠️ Motor Utilizado
 * **Godot Engine 4.6** (Versión Standard / GDScript)
@@ -43,6 +43,7 @@ Siga estos pasos para clonar y ejecutar el prototipo correctamente:
 ## 🕹️ Instrucciones para Jugar
 
 El objetivo es sobrevivir en un planeta hostil: recolectar recursos farmeando, repara tu nave interactuando con ella y defiéndete de los enemigos con tu ataque de corto rango.
+El objetivo principal es sobrevivir a lo largo de 3 niveles distintos (Planeta Desconocido, Catacumbas y Tormenta de Hielo), abriéndote paso entre las oleadas de enemigos, farmear los recursos para reparar la nave y alcanzar el punto de extracción (Salida).
 
 ### Controles
 
@@ -57,8 +58,8 @@ El objetivo es sobrevivir en un planeta hostil: recolectar recursos farmeando, r
 | Farmear | `Q` | Button 3 |
 
 ### Mecánicas principales
-
-* **Movimiento:** Usa `WASD` para desplazarte por el planeta. El personaje tiene aceleración y fricción, por lo que el movimiento es fluido.
-* **Ataque:** Presiona `Espacio` para atacar con tu arma de corto rango. No puedes moverte mientras atacas.
-* **Farmear:** Presiona `Q` cerca de recursos del entorno para recolectarlos. Son necesarios para reparar la nave.
-* **Interactuar:** Presiona `E` para interactuar con objetos del escenario, como la nave o ítems recogibles.
+* **Exploración y Progresión:** El juego cuenta con un sistema de transición de niveles. Debes explorar el mapa hasta encontrar la zona de salida para avanzar al siguiente bioma.
+* **Sistema de Combate y Salud:** El jugador cuenta con 5 corazones (100 HP). El contacto directo o los ataques de los Slimes reducirán la vida. Al llegar a 0, el juego termina (Game Over).
+* **Ataque Melee:** Presiona `Espacio` para usar tu espada. Eliminar enemigos actualizará tu contador de bajas (Kills) en la esquina superior derecha. 
+* **Farmear e Interactuar:** Usa `Q` y `E` para recolectar recursos en el entorno y manipular objetos clave del escenario (como la nave espacial).
+* **Interfaz Dinámica (HUD):** El juego presenta un HUD completo que rastrea la vida en tiempo real, el conteo de enemigos derrotados, cantidad de recursos recolectados y menús interactivos para reiniciar la partida o salir tras la victoria o la muerte.

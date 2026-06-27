@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vyqdv11emsl"
-path="res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"
+uid="uid://cymw1sig35d7v"
+path="res://.godot/imported/TilesetField.png-b03709021d49ff7e40d6fa7e1ef337f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Astronaut.png"
-dest_files=["res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"]
+source_file="res://art/environment/TilesetField.png"
+dest_files=["res://.godot/imported/TilesetField.png-b03709021d49ff7e40d6fa7e1ef337f5.ctex"]
 
 [params]
 

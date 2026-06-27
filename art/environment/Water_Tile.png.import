@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vyqdv11emsl"
-path="res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"
+uid="uid://cieo8kxh2ey4y"
+path="res://.godot/imported/Water_Tile.png-4576783a462537c3b6c0786094020de5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Astronaut.png"
-dest_files=["res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"]
+source_file="res://art/environment/Water_Tile.png"
+dest_files=["res://.godot/imported/Water_Tile.png-4576783a462537c3b6c0786094020de5.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vyqdv11emsl"
-path="res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"
+uid="uid://dq6i7ryd6jbv3"
+path="res://.godot/imported/sand - Copy.png-ff70667b5a69465c5c5b9af8b248ed37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Astronaut.png"
-dest_files=["res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"]
+source_file="res://art/environment/sand - Copy.png"
+dest_files=["res://.godot/imported/sand - Copy.png-ff70667b5a69465c5c5b9af8b248ed37.ctex"]
 
 [params]
 

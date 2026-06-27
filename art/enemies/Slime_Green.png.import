@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vyqdv11emsl"
-path="res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"
+uid="uid://b504qbtj76dx6"
+path="res://.godot/imported/Slime_Green.png-5e4179118a6c3d9e7268be406707b4ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Astronaut.png"
-dest_files=["res://.godot/imported/Astronaut.png-1efac45c2112587546f458e3e000f76a.ctex"]
+source_file="res://art/enemies/Slime_Green.png"
+dest_files=["res://.godot/imported/Slime_Green.png-5e4179118a6c3d9e7268be406707b4ee.ctex"]
 
 [params]
 

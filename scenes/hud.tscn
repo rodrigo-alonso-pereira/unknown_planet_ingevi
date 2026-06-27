@@ -1,0 +1,275 @@
+[gd_scene format=3 uid="uid://cyyp25ds1m6mr"]
+
+[ext_resource type="Texture2D" uid="uid://bw1yihk7tmb63" path="res://art/UI/Heart_full.png" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://dij3oivw2rbpa" path="res://scenes/hud.gd" id="1_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://urryyrn7nj5" path="res://art/UI/panel_hud.png" id="2_6fi6k"]
+[ext_resource type="AudioStream" uid="uid://lys6y0kcnqru" path="res://sound/death.wav" id="3_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://dstcqlunmxoy7" path="res://art/UI/Skull_full.png" id="4_uo2fv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uo2fv"]
+bg_color = Color(0.11764706, 0.16078432, 0.23137255, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_047uy"]
+bg_color = Color(0.05882353, 0.09019608, 0.16470589, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5pdws"]
+bg_color = Color(0.2, 0.25490198, 0.33333334, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+
+[node name="HUD" type="CanvasLayer" unique_id=1279054340]
+script = ExtResource("1_oo0fn")
+
+[node name="LevelTitle" type="Label" parent="." unique_id=394767328]
+custom_minimum_size = Vector2(600, 120)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_bottom = 120.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9843137, 0.7490196, 0.14117648, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0.05882353, 0.09019608, 0.16470589, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HudPanel" type="NinePatchRect" parent="." unique_id=148632338]
+offset_left = 56.0
+offset_top = 6.0
+offset_right = 527.0
+offset_bottom = 100.0
+texture = ExtResource("2_6fi6k")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Hearts" type="HBoxContainer" parent="." unique_id=842578946]
+offset_left = 94.0
+offset_top = 37.000004
+offset_right = 210.0
+offset_bottom = 57.000004
+scale = Vector2(2.5, 2.5)
+
+[node name="Heart1" type="TextureRect" parent="Hearts" unique_id=1394085372]
+layout_mode = 2
+texture = ExtResource("1_ahhtf")
+stretch_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="Hearts" unique_id=2007016407]
+layout_mode = 2
+texture = ExtResource("1_ahhtf")
+stretch_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="Hearts" unique_id=416607559]
+layout_mode = 2
+texture = ExtResource("1_ahhtf")
+stretch_mode = 2
+
+[node name="Heart4" type="TextureRect" parent="Hearts" unique_id=756003192]
+layout_mode = 2
+texture = ExtResource("1_ahhtf")
+stretch_mode = 2
+
+[node name="Heart5" type="TextureRect" parent="Hearts" unique_id=1507702092]
+layout_mode = 2
+texture = ExtResource("1_ahhtf")
+stretch_mode = 2
+
+[node name="KillCounter" type="HBoxContainer" parent="." unique_id=1790878910]
+offset_left = 400.0
+offset_top = 33.0
+offset_right = 440.0
+offset_bottom = 73.0
+
+[node name="SkullIcon" type="TextureRect" parent="KillCounter" unique_id=2000746872]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("4_uo2fv")
+stretch_mode = 5
+
+[node name="KillCountLabel" type="Label" parent="KillCounter" unique_id=1833679640]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.7019608, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = "0"
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=1072181332]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GameOverMenu" type="Control" parent="." unique_id=1544014679]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -24.0
+offset_right = 17.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu" unique_id=1445749899]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -46.5
+offset_right = 51.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="DeathText" type="Label" parent="GameOverMenu/VBoxContainer" unique_id=560313614]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.90257204, 1.347661e-06, 0.47872794, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 64
+text = "HAS MUERTO"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverMenu/VBoxContainer" unique_id=2081288872]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_uo2fv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_047uy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5pdws")
+text = "Reiniciar"
+
+[node name="QuitButton" type="Button" parent="GameOverMenu/VBoxContainer" unique_id=1335039298]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_uo2fv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_047uy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5pdws")
+text = "Salir"
+
+[node name="VictoryPanel" type="Control" parent="." unique_id=1946816025]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="VictoryPanel" unique_id=1391060217]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05882353, 0.09019608, 0.16470589, 0.9019608)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VictoryPanel" unique_id=1255274475]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="VictoryTitle" type="Label" parent="VictoryPanel/VBoxContainer" unique_id=60733154]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9843137, 0.7490196, 0.14117648, 1)
+theme_override_font_sizes/font_size = 48
+text = "¡MISIÓN COMPLETADA!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VictorySub" type="Label" parent="VictoryPanel/VBoxContainer" unique_id=1117629021]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+theme_override_font_sizes/font_size = 20
+text = "Lograste escapar del planeta desconocido"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="VictoryPanel/VBoxContainer" unique_id=1980757189]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="VictoryRestartButton" type="Button" parent="VictoryPanel/VBoxContainer" unique_id=27447620]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_uo2fv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_047uy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5pdws")
+text = "Jugar de nuevo"
+
+[node name="VictoryQuitButton" type="Button" parent="VictoryPanel/VBoxContainer" unique_id=1908152525]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_uo2fv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_047uy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5pdws")
+text = "Salir"
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=1684178001]
+stream = ExtResource("3_5ysmq")
