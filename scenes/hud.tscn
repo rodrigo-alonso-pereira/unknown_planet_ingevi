@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://urryyrn7nj5" path="res://art/UI/panel_hud.png" id="2_6fi6k"]
 [ext_resource type="AudioStream" uid="uid://lys6y0kcnqru" path="res://sound/death.wav" id="3_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://dstcqlunmxoy7" path="res://art/UI/Skull_full.png" id="4_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://dchf4dap58nyl" path="res://art/items/mystrile_ore.png" id="5_047uy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uo2fv"]
 bg_color = Color(0.11764706, 0.16078432, 0.23137255, 1)
@@ -65,7 +66,7 @@ metadata/_edit_use_anchors_ = true
 [node name="HudPanel" type="NinePatchRect" parent="." unique_id=148632338]
 offset_left = 56.0
 offset_top = 6.0
-offset_right = 527.0
+offset_right = 587.0
 offset_bottom = 100.0
 texture = ExtResource("2_6fi6k")
 patch_margin_left = 16
@@ -118,6 +119,27 @@ texture = ExtResource("4_uo2fv")
 stretch_mode = 5
 
 [node name="KillCountLabel" type="Label" parent="KillCounter" unique_id=1833679640]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.7019608, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = "0"
+
+[node name="Mineral Counter" type="HBoxContainer" parent="." unique_id=769265737]
+offset_left = 490.0
+offset_top = 33.0
+offset_right = 566.0
+offset_bottom = 89.0
+
+[node name="MineralIcon" type="TextureRect" parent="Mineral Counter" unique_id=1798663086]
+custom_minimum_size = Vector2(55, 50)
+layout_mode = 2
+texture = ExtResource("5_047uy")
+stretch_mode = 5
+
+[node name="MineralCountLabel" type="Label" parent="Mineral Counter" unique_id=1807062447]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.7019608, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
@@ -273,3 +295,4 @@ text = "Salir"
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=1684178001]
 stream = ExtResource("3_5ysmq")
+volume_db = -10.0

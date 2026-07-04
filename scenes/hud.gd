@@ -18,6 +18,7 @@ const SKULL_ICON  = preload("res://art/UI/Skull_full.png")
 
 @onready var skull_icon: TextureRect = $KillCounter/SkullIcon
 @onready var kill_count_label: Label = $KillCounter/KillCountLabel
+@onready var mineral_count_label: Label = $"Mineral Counter/MineralCountLabel"
 @onready var level_title: Label = $LevelTitle
 
 @onready var victory_panel: Control = $VictoryPanel
@@ -42,13 +43,18 @@ func _ready() -> void:
 # ── Kill counter ──────────────────────────────────────────────────────────────
 
 func update_kills(count: int) -> void:
-	kill_count_label.text = " %d" % count
+	kill_count_label.text = "%d" % count
 	var tween := create_tween()
 	tween.tween_property(skull_icon, "scale", Vector2(1.4, 1.4), 0.08)
 	tween.tween_property(skull_icon, "scale", Vector2(1.0, 1.0), 0.12)
 
+# ── Mineral counter ──────────────────────────────────────────────────────────────
+
+func update_minerals(count: int) -> void:
+	mineral_count_label.text = "%d" % count
 
 # ── Intro de nivel ────────────────────────────────────────────────────────────
+
 
 func show_level_title(level: int) -> void:
 	var titles := {
