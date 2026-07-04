@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c3imms0bxlkyb" path="res://scenes/levels/level_root.tscn" id="1_ksju7"]
 [ext_resource type="PackedScene" uid="uid://bo7q3i082cxa2" path="res://characters/slime.tscn" id="2_6iamk"]
+[ext_resource type="PackedScene" uid="uid://ghh07l6sjfb5" path="res://characters/robot_npc.tscn" id="3_nsrm0"]
+[ext_resource type="PackedScene" uid="uid://bu7qvlhweraqo" path="res://objects/mineral.tscn" id="4_x42e6"]
 
 [node name="LevelRoot" unique_id=199767071 instance=ExtResource("1_ksju7")]
 
@@ -34,6 +36,18 @@ position = Vector2(933, 633)
 
 [node name="Slime6" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="6" unique_id=309366732 instance=ExtResource("2_6iamk")]
 position = Vector2(1223, 209)
+
+[node name="RobotNPC" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="7" unique_id=1387410876 instance=ExtResource("3_nsrm0")]
+position = Vector2(593, 125)
+
+[node name="mineral" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="8" unique_id=1556115131 instance=ExtResource("4_x42e6")]
+position = Vector2(459, 176)
+
+[node name="mineral2" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="9" unique_id=1348261000 instance=ExtResource("4_x42e6")]
+position = Vector2(419, 191)
+
+[node name="mineral3" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="10" unique_id=1262955647 instance=ExtResource("4_x42e6")]
+position = Vector2(497, 198)
 
 [node name="Exit" parent="." index="2" unique_id=634749405]
 position = Vector2(856, 1055)
