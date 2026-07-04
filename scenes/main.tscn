@@ -16,8 +16,9 @@ position = Vector2(1, -33)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=229753541]
 stream = ExtResource("4_jyhfs")
-volume_db = -6.0
+volume_db = -15.0
 autoplay = true
 
 [node name="VictorySound" type="AudioStreamPlayer" parent="." unique_id=1491695774]
 stream = ExtResource("5_tbgi4")
+volume_db = -10.0

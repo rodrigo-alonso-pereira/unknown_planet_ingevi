@@ -13,6 +13,8 @@ func _ready() -> void:
 	# Conecta los botones de reinicio y termino del juego 
 	hud.restart_requested.connect(_on_restart_requested)
 	hud.quit_requested.connect(_on_quit_requested)
+	# Conecta la señal del autoload al HUD una sola vez aquí
+	AstronautPlayerStats.mineral_collected.connect(hud.update_minerals)
 	current_level_root = get_node("LevelRoot")
 	# Busca la escena del nivel
 	if current_level_root:
@@ -28,7 +30,7 @@ func _on_exit_body_entered(body: Node2D) -> void:
 		level += 1
 		# Si llega al nivel 3, finaliza el juego
 		if level > 3:
-			_trigger_victory()
+			level = 1
 		else:
 			call_deferred("_load_level", level)
 
@@ -59,9 +61,8 @@ func _load_level(level_number: int) -> void:
 	hud.show_level_title(level_number)
 	_play_background_music()
 	_setup_level(current_level_root)
-	# Actualiza el conteo de muertes
-	_kill_count = 0
 	hud.update_kills(_kill_count)
+	hud.update_minerals(AstronautPlayerStats.mineral_count)
 
 # Configura el nivel, una vez cargado
 func _setup_level(level_root: Node) -> void:
@@ -79,7 +80,13 @@ func _setup_level(level_root: Node) -> void:
 			player.health_changed.connect(hud._update_health)
 	else:
 		print("ERROR CRÍTICO: Main no encontró al AstronautPlayer.")
-
+	
+	# ── Conexión del robot NPC ──────────────────────────────────────────────
+	for robot in get_tree().get_nodes_in_group("npc"):
+		if not robot.victory_triggered.is_connected(_trigger_victory):
+			robot.victory_triggered.connect(_trigger_victory)
+	# ───────────────────────────────────────────────────────────────────────
+	
 	await get_tree().process_frame
 	for slime in get_tree().get_nodes_in_group("enemies"):
 		if not slime.died.is_connected(_on_slime_died):
@@ -115,7 +122,9 @@ func _on_restart_requested() -> void:
 	# Reinicia los stats del jugador
 	AstronautPlayerStats.reset()
 	hud._update_health(AstronautPlayerStats.health)
+	hud.update_minerals(0)
 	# Vuelve a empezar en el nivel 1
+	_kill_count = 0
 	level = 1
 	_load_level(1)
 	await hud.fade(0.0)
