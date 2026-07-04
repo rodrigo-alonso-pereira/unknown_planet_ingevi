@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bu7qvlhweraqo"]
+
+[ext_resource type="Texture2D" uid="uid://x7vh7k54nxr3" path="res://art/environment/minerals.png" id="1_4c5ij"]
+[ext_resource type="Script" uid="uid://du06uhbi1ikqv" path="res://objects/mineral.gd" id="1_lhxvl"]
+[ext_resource type="AudioStream" uid="uid://kydllfvhs7r6" path="res://sound/mineral.wav" id="3_t3jqv"]
+[ext_resource type="AudioStream" uid="uid://bekh2r3hcqovq" path="res://sound/pickaxe.wav" id="4_i8g6p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhxvl"]
+size = Vector2(19, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3jqv"]
+size = Vector2(19, 18)
+
+[node name="mineral" type="StaticBody2D" unique_id=1556115131]
+script = ExtResource("1_lhxvl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=561315289]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4c5ij")
+vframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=562906703]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_lhxvl")
+
+[node name="Mineral" type="AudioStreamPlayer2D" parent="." unique_id=989944716]
+stream = ExtResource("3_t3jqv")
+
+[node name="Range" type="Area2D" parent="." unique_id=263856827]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range" unique_id=1483276641]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_t3jqv")
+
+[node name="TakeDamage" type="AudioStreamPlayer2D" parent="." unique_id=1613909969]
+stream = ExtResource("4_i8g6p")
+
+[connection signal="area_shape_entered" from="Range" to="." method="_on_range_area_shape_entered"]
+[connection signal="area_shape_exited" from="Range" to="." method="_on_range_area_shape_exited"]

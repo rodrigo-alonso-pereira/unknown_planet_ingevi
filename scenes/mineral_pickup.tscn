@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ctjl546dm0yo3"]
+
+[ext_resource type="Texture2D" uid="uid://dchf4dap58nyl" path="res://art/items/mystrile_ore.png" id="1_j0xsr"]
+[ext_resource type="Script" uid="uid://h3sxqqbx7llc" path="res://scenes/mineral_pickup.gd" id="1_vyvil"]
+[ext_resource type="AudioStream" uid="uid://kydllfvhs7r6" path="res://sound/mineral.wav" id="3_y4r8c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0xsr"]
+size = Vector2(14, 12)
+
+[node name="mineral_pickup" type="Area2D" unique_id=703495966]
+script = ExtResource("1_vyvil")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1161786513]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_j0xsr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=283272596]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_j0xsr")
+
+[node name="CollectedSound" type="AudioStreamPlayer2D" parent="." unique_id=1470391322]
+stream = ExtResource("3_y4r8c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
