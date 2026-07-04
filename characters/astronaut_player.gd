@@ -3,8 +3,8 @@ extends CharacterBody2D
 signal died
 signal health_changed(new_health: int)
 
-const speed = 200
-const acceleration = 800
+const speed = 150
+const acceleration = 600
 var friction: float = 1000.0
 
 var last_direction := Vector2.DOWN
@@ -18,7 +18,6 @@ var health: int
 @onready var move_state_machine = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var action_state_machine = $Animation/AnimationTree.get("parameters/ActionStateMachine/playback")
 @onready var swing_sword_sound: AudioStreamPlayer2D = $SwingSword
-@onready var swing_pickaxe_sound: AudioStreamPlayer2D = $SwingPickaxe
 @onready var hitbox: Area2D = $Hitbox
 @onready var take_damage_sound: AudioStreamPlayer2D = $TakeDamage
 @onready var damage_cooldown: Timer = $DamageCooldown
@@ -76,7 +75,6 @@ func get_basic_input(is_acting: bool):
 		is_attacking = false
 
 	if Input.is_action_just_pressed("farm") and not is_acting:
-		swing_pickaxe_sound.play()
 		$Animation/AnimationTree.set("parameters/ActionStateMachine/Farm/blend_position", last_direction)
 		action_state_machine.travel("Farm")
 		$Animation/AnimationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
@@ -104,6 +102,14 @@ func update_hitbox_offset() -> void:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if is_attacking and body.is_in_group("enemies"):
 		body.take_damage(strength, position)
+
+# Funcion que permite aumentar la vida del personaje
+func heal(amount: int) -> void:
+	health += amount
+	if health >= max_health:
+		health = max_health
+	AstronautPlayerStats.health = health
+	emit_signal("health_changed", health)
 
 
 func take_damage(amount: int) -> void:

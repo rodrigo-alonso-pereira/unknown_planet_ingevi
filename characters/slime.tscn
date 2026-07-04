@@ -179,7 +179,7 @@ script = ExtResource("1_tcriy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1029021745]
 sprite_frames = SubResource("SpriteFrames_u44m5")
-animation = &"die"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=753661558]

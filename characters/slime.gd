@@ -10,11 +10,13 @@ signal died  # <-- NUEVO: avisamos cuando el slime muere
 const SPEED = 100.0
 var is_alive: bool = true
 const KNOCKBACK_FORCE: int = 100
+const DROP_CHANCE: float = 0.5
 var health: int = 100
 var strength: int = 10
 var target = null
 var target_in_range: bool = false
 
+var health_pickup_scene = preload("res://scenes/health_pickup.tscn")
 
 func _physics_process(delta: float) -> void:
 	if is_alive and target:
@@ -52,11 +54,15 @@ func _die() -> void:
 	
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sight/CollisionShape2D.set_deferred("disabled", true)
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	
 	# Esperamos que termine la animación antes de emitir y borrar
 	await animated_sprite_2d.animation_finished
 	died.emit()  # <-- NUEVO
 	queue_free()
+	# Drop health pickup
+	if randf() <= DROP_CHANCE:
+		drop_item()
 
 
 func _on_sight_body_entered(body: Node2D) -> void:
@@ -83,3 +89,11 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 func _on_attack_cooldown_timeout() -> void:
 	if target and target_in_range:
 		target.take_damage(strength)
+		
+# Funcion que permite instanciar la escena del corazon de vida 
+func drop_item():
+	var drop = health_pickup_scene.instantiate()
+	drop.position = position
+	var level_root = get_parent().get_parent()
+	var items_node = level_root.get_node("Items")
+	items_node.call_deferred("add_child", drop)
