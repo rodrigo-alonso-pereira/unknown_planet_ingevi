@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Unknown_Planet_WORKING"
+config/name="Unknown Planet Ingevi Dev (2)"
 run/main_scene="uid://56etxf2ucrob"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"

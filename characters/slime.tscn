@@ -174,7 +174,6 @@ size = Vector2(20, 18)
 
 [node name="Slime" type="CharacterBody2D" unique_id=1936246128 groups=["enemies"]]
 collision_layer = 2
-collision_mask = 0
 script = ExtResource("1_tcriy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1029021745]
@@ -204,6 +203,12 @@ position = Vector2(-9, 9)
 shape = SubResource("RectangleShape2D_dar60")
 
 [node name="AttackCooldown" type="Timer" parent="." unique_id=103349466]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1000000004]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+avoidance_enabled = true
+radius = 8.0
 
 [connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
 [connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
