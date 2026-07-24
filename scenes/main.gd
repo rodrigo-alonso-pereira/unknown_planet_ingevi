@@ -4,7 +4,7 @@ extends Node2D
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
 @onready var victory_sound: AudioStreamPlayer = $VictorySound
 
-var level: int = 1
+var level: int = 3
 var current_level_root: Node = null
 var _kill_count: int = 0
 
@@ -27,13 +27,13 @@ func _ready() -> void:
 # Funcion que actualiza el nivel del jugador, una vez que llega al final de cada nivel
 func _on_exit_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		level += 1
-		# Si llega al nivel 3, finaliza el juego
-		if level > 3:
+		# Si llega al nivel 3, vuelve al nivel 1
+		if level == 3:
 			level = 1
 		else:
-			call_deferred("_load_level", level)
-
+			level += 1
+		call_deferred("_load_level", level)
+		
 # Función que muestra la pantalla de victoria
 func _trigger_victory() -> void:
 	_stop_background_music()

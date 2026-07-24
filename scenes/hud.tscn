@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyyp25ds1m6mr"]
 
-[ext_resource type="Texture2D" uid="uid://bw1yihk7tmb63" path="res://art/UI/Heart_full.png" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://hmbdg8ti6tis" path="res://art/UI/Heart_full.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://dij3oivw2rbpa" path="res://scenes/hud.gd" id="1_oo0fn"]
 [ext_resource type="Texture2D" uid="uid://urryyrn7nj5" path="res://art/UI/panel_hud.png" id="2_6fi6k"]
 [ext_resource type="AudioStream" uid="uid://lys6y0kcnqru" path="res://sound/death.wav" id="3_5ysmq"]
@@ -66,7 +66,7 @@ metadata/_edit_use_anchors_ = true
 [node name="HudPanel" type="NinePatchRect" parent="." unique_id=148632338]
 offset_left = 56.0
 offset_top = 6.0
-offset_right = 587.0
+offset_right = 639.0
 offset_bottom = 100.0
 texture = ExtResource("2_6fi6k")
 patch_margin_left = 16
@@ -109,8 +109,8 @@ stretch_mode = 2
 [node name="KillCounter" type="HBoxContainer" parent="." unique_id=1790878910]
 offset_left = 400.0
 offset_top = 33.0
-offset_right = 440.0
-offset_bottom = 73.0
+offset_right = 476.0
+offset_bottom = 89.0
 
 [node name="SkullIcon" type="TextureRect" parent="KillCounter" unique_id=2000746872]
 custom_minimum_size = Vector2(40, 40)
@@ -130,8 +130,9 @@ text = "0"
 [node name="Mineral Counter" type="HBoxContainer" parent="." unique_id=769265737]
 offset_left = 490.0
 offset_top = 33.0
-offset_right = 566.0
+offset_right = 630.0
 offset_bottom = 89.0
+theme_override_constants/separation = 5
 
 [node name="MineralIcon" type="TextureRect" parent="Mineral Counter" unique_id=1798663086]
 custom_minimum_size = Vector2(55, 50)
@@ -147,6 +148,15 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 28
 text = "0"
+
+[node name="TotalMinerals" type="Label" parent="Mineral Counter" unique_id=1376118922]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.7019608, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = " /12"
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=1072181332]
 modulate = Color(1, 1, 1, 0)
