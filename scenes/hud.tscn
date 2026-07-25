@@ -6,6 +6,36 @@
 [ext_resource type="AudioStream" uid="uid://lys6y0kcnqru" path="res://sound/death.wav" id="3_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://dstcqlunmxoy7" path="res://art/UI/Skull_full.png" id="4_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://dchf4dap58nyl" path="res://art/items/mystrile_ore.png" id="5_047uy"]
+[ext_resource type="Script" path="res://scenes/robot_dialog_tail.gd" id="7_taily"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tutorial"]
+bg_color = Color(0.05882353, 0.09019608, 0.16470589, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialog"]
+bg_color = Color(0.08627451, 0.078431375, 0.14117648, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9843137, 0.7490196, 0.14117648, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 6
+shadow_offset = Vector2(2, 3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uo2fv"]
 bg_color = Color(0.11764706, 0.16078432, 0.23137255, 1)
@@ -41,15 +71,18 @@ expand_margin_top = 4.0
 
 [node name="HUD" type="CanvasLayer" unique_id=1279054340]
 script = ExtResource("1_oo0fn")
+dialog_offset = Vector2(-90, -120)
+tail_tip_offset = Vector2(-20, -55)
 
 [node name="LevelTitle" type="Label" parent="." unique_id=394767328]
 custom_minimum_size = Vector2(600, 120)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -300.0
-offset_right = 300.0
-offset_bottom = 120.0
+offset_left = -298.0
+offset_top = 47.0
+offset_right = 302.0
+offset_bottom = 167.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.9843137, 0.7490196, 0.14117648, 1)
@@ -156,7 +189,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 28
-text = " /12"
+text = "/12"
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=1072181332]
 modulate = Color(1, 1, 1, 0)
@@ -166,6 +199,78 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="TutorialBox" type="PanelContainer" parent="." unique_id=1380288756]
+visible = false
+custom_minimum_size = Vector2(750, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -369.0
+offset_top = 329.0
+offset_right = 381.0
+offset_bottom = 385.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tutorial")
+
+[node name="TutorialMargin" type="MarginContainer" parent="TutorialBox" unique_id=1380288757]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 12
+
+[node name="TutorialLabel" type="Label" parent="TutorialBox/TutorialMargin" unique_id=1380288758]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9843137, 0.9490196, 0.7411765, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="RobotDialogTail" type="Control" parent="." unique_id=305991362]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("7_taily")
+
+[node name="RobotDialog" type="PanelContainer" parent="." unique_id=305991361]
+visible = false
+custom_minimum_size = Vector2(260, 0)
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
+
+[node name="MarginContainer" type="MarginContainer" parent="RobotDialog" unique_id=1074602110]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RobotDialog/MarginContainer" unique_id=2106187815]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpeakerLabel" type="Label" parent="RobotDialog/MarginContainer/VBoxContainer" unique_id=313237560]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9843137, 0.7490196, 0.14117648, 1)
+theme_override_colors/font_outline_color = Color(0.05882353, 0.09019608, 0.16470589, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "ROBOT"
+
+[node name="DialogLabel" type="Label" parent="RobotDialog/MarginContainer/VBoxContainer" unique_id=1986554146]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.90588236, 0.8, 1)
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
 
 [node name="GameOverMenu" type="Control" parent="." unique_id=1544014679]
 visible = false

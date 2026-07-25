@@ -1,6 +1,8 @@
 extends StaticBody2D
 
 signal victory_triggered
+signal dialog_requested(text: String)  # pide mostrar dialogo
+signal dialog_hide_requested            # pide ocultar dialogo
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interact_sound: AudioStreamPlayer2D = $Interact
@@ -24,10 +26,14 @@ func _trigger_interact() -> void:
 	_is_interacting = true
 	interact_sound.play()
 	# Decide qué animación reproducir según los minerales recolectados
-	if AstronautPlayerStats.mineral_count >= 3:
+	if AstronautPlayerStats.mineral_count >= 12:
 		animated_sprite_2d.play("final")
 	else:
 		animated_sprite_2d.play("interact")
+		# Calcula cuántos recursos faltan y muestra el diálogo
+		var remaining := 12 - AstronautPlayerStats.mineral_count
+		var text := "Estamos varados en un planeta desconocido...\nVuelve cuando recolectes %d recursos para poder reparar tu nave y escapar..." % remaining
+		dialog_requested.emit(text, self)
 
 func _on_animation_finished() -> void:
 	match animated_sprite_2d.animation:
@@ -51,3 +57,5 @@ func _on_range_area_shape_exited(_area_rid: RID, area: Area2D, _area_shape_index
 	# Verificamos que el padre exista y que esté en el grupo "player"
 	if body and body.is_in_group("player"):
 		_player_in_range = false
+		# Si el jugador se aleja mientras el diálogo está abierto, lo cerramos
+		dialog_hide_requested.emit()
