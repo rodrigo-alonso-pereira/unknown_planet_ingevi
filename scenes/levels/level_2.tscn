@@ -11,6 +11,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(849, 2, 850, 130, 531, 127, 531, -19, 461, -17, 464, 127, 206, 130, 202, 0, 16, 0, 19, 222, 304, 221, 307, 430, 16, 430, 16, 493, 303, 494, 305, 688, 129, 689, 129, 880, 193, 880, 193, 736, 306, 737, 306, 906, 1708, 908, 1710, 515, 1872, 515, 1873, 945, 1937, 944, 1937, 415, 1875, 417, 1872, 448, 1711, 448, 1712, 364, 2000, 364, 2002, 318, 1971, 319, 1969, -97, 896, -97, 894, 2)])
 
 [node name="LevelRoot" unique_id=199767071 instance=ExtResource("1_j2425")]
+position = Vector2(2, 10)
 
 [node name="NavigationRegion2D" parent="Environment" parent_id_path=PackedInt32Array(854086235) index="0" unique_id=802556274]
 navigation_polygon = SubResource("NavigationPolygon_ra442")
@@ -30,7 +31,7 @@ visible = false
 position = Vector2(2207, 198)
 
 [node name="AstronautPlayer" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="0" unique_id=555874912]
-position = Vector2(897, 51)
+position = Vector2(897, 58)
 
 [node name="Slime" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="1" unique_id=1936246128]
 position = Vector2(890, 742)
@@ -69,10 +70,10 @@ position = Vector2(1130, 550)
 position = Vector2(775, 311)
 
 [node name="mineral3" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="13" unique_id=695975047 instance=ExtResource("3_fiq81")]
-position = Vector2(40, 462)
+position = Vector2(63, 453)
 
 [node name="mineral4" parent="Objects" parent_id_path=PackedInt32Array(176015704) index="14" unique_id=866925059 instance=ExtResource("3_fiq81")]
-position = Vector2(496, 2)
+position = Vector2(494, 8)
 
 [node name="Exit" parent="." index="2" unique_id=634749405]
 position = Vector2(2015, 350)

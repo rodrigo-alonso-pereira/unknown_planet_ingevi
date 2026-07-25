@@ -4,7 +4,7 @@ extends Node2D
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
 @onready var victory_sound: AudioStreamPlayer = $VictorySound
 
-var level: int = 3
+var level: int = 1
 var current_level_root: Node = null
 var _kill_count: int = 0
 
@@ -63,6 +63,10 @@ func _load_level(level_number: int) -> void:
 	_setup_level(current_level_root)
 	hud.update_kills(_kill_count)
 	hud.update_minerals(AstronautPlayerStats.mineral_count)
+	
+	# Tutorial solo la primera vez que se carga el nivel 1
+	if level_number == 1 and _kill_count == 0 and AstronautPlayerStats.mineral_count == 0:
+		hud.show_tutorial()
 
 # Configura el nivel, una vez cargado
 func _setup_level(level_root: Node) -> void:
@@ -85,6 +89,10 @@ func _setup_level(level_root: Node) -> void:
 	for robot in get_tree().get_nodes_in_group("npc"):
 		if not robot.victory_triggered.is_connected(_trigger_victory):
 			robot.victory_triggered.connect(_trigger_victory)
+		if not robot.dialog_requested.is_connected(hud.show_robot_dialog):
+			robot.dialog_requested.connect(hud.show_robot_dialog)
+		if not robot.dialog_hide_requested.is_connected(hud.hide_robot_dialog):
+			robot.dialog_hide_requested.connect(hud.hide_robot_dialog)
 	# ───────────────────────────────────────────────────────────────────────
 	
 	await get_tree().process_frame
